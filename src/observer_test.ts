@@ -1,5 +1,5 @@
 import Observer from "./observer";
-import assert from "assert";
+import * as assert from "assert";
 
 function wait(t: number) {
   return new Promise(resolve => setTimeout(resolve, t));
@@ -11,17 +11,18 @@ describe("Observer", function() {
     let callCount = 0;
 
     o.subscribe("foobar", function(val) {
-      assert.equal(val, 1);
+      assert.equal(1, val, "Value should be 1");
       callCount++;
     });
-    o.subscribe("foobar", async function(val) {
+
+    o.subscribe("foobar", async function asyncer(val) {
       await wait(50);
-      assert.equal(val, 1);
+      assert.equal(1, val, "Value should be 1");
       callCount++;
     });
 
     await o.publish("foobar", 1);
-    assert.equal(callCount, 2);
+    assert.equal(callCount, 2, "Both methods should have executed");
   });
 
   it("should unsubscribe to a listener", function() {

@@ -13,13 +13,27 @@ asynchronous library. This is useful when:
 Some extra tidbits:
 
 * There are zero-dependencies
-* It's well tested
+* It's well tested with benchmarks @see [Performance](#performance)
 
 ### Installation
 
 ```
 npm i --save fast-observer
 ```
+
+### Performance
+
+It's unnecessary to profile the `publishFast` method. It's going to be as fast
+as calling a function directly.
+
+However, the O(N) `publish()` method is 14.5 times faster the most popular
+event dispatcher library called [PubSub-js](https://github.com/mroderick/PubSubJS).
+
+* fast-observer: `Executed 10000000 times in 436 ms`
+* PubSub-js: `Executed 10000000 times in 6341 ms`
+
+See benchmarks [here](benchmark/). I'd be happy to adjust or add more
+benchmarks if requested.
 
 ### Usage
 

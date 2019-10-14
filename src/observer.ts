@@ -20,15 +20,24 @@ export default class Observer {
    * Publish a new event for all subscribers to consume.
    */
   async publish(name: string, payload?: any): Promise<void> {
+    let hasPromises = false;
     const fns = [];
     const evts = this.subscriptions;
+
     for (let i = 0, l = evts.length; i < l; i++) {
       if (evts[i] && name === evts[i].name) {
-        fns.push(this.subscriptions[i].fn(payload));
+        const fn = this.subscriptions[i].fn;
+        fns.push(fn(payload));
+
+        if (!hasPromises && fn.constructor.name === "AsyncFunction") {
+          hasPromises = true;
+        }
       }
     }
 
-    await Promise.all(fns);
+    if (hasPromises) {
+      await Promise.all(fns);
+    }
   }
 
   /**
@@ -37,7 +46,11 @@ export default class Observer {
   async publishFast(name: string, payload?: any): Promise<void> {
     const fn = this.fastEvents[name];
     if (fn) {
-      await fn(payload);
+      if (fn.constructor.name === "AsyncFunction") {
+        await fn(payload);
+      } else {
+        fn(payload);
+      }
     }
   }
 
