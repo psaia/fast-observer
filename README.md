@@ -9,6 +9,7 @@ asynchronous library. This is useful when:
 * You want to work with async/await on publishing
 * You care about file size
 * Convenience features such as namespaces aren't necessary
+* Works in the browser, on the server, and when doing SSR
 
 Some extra tidbits:
 
