@@ -1,6 +1,6 @@
 {
   "name": "fast-observer",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A simple zero-dependency O(1) and asynchronous event dispatcher.",
   "main": "lib/observer.js",
   "scripts": {

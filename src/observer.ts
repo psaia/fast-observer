@@ -27,9 +27,11 @@ export default class Observer {
     for (let i = 0, l = evts.length; i < l; i++) {
       if (evts[i] && name === evts[i].name) {
         const fn = this.subscriptions[i].fn;
-        fns.push(fn(payload));
+        const result = fn(payload);
 
-        if (!hasPromises && fn.constructor.name === "AsyncFunction") {
+        fns.push(result);
+
+        if (!hasPromises && result && result["then"]) {
           hasPromises = true;
         }
       }
@@ -45,8 +47,11 @@ export default class Observer {
    */
   async publishFast(name: string, payload?: any): Promise<void> {
     const fn = this.fastEvents[name];
+
     if (fn) {
-      if (fn.constructor.name === "AsyncFunction") {
+      const result = fn(payload);
+
+      if (result && result["then"]) {
         await fn(payload);
       } else {
         fn(payload);
