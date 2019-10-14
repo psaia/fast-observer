@@ -7,17 +7,19 @@ export interface Subscription {
 
 export default class Observer {
   /**
-   * A hash for storing convenient subscriptions.
+   * A hash for storing subscriptions.
    */
   subscriptions: Subscription[] = [];
 
   /**
-   * A hash for storing efficient subscriptions.
+   * A hash for storing O(1) subscriptions.
    */
   fastEvents: { [name: string]: PayloadFn } = {};
 
   /**
-   * Publish a new event for all subscribers to consume.
+   * Publish a new event for all subscribers to consume. Promises are sniffed
+   * out to determine whether or not to Promise.all() at the end. Non-sync
+   * functions have a performance hit so only await a promise if it's necessary.
    */
   async publish(name: string, payload?: any): Promise<void> {
     let hasPromises = false;
@@ -43,7 +45,9 @@ export default class Observer {
   }
 
   /**
-   * O(1) publishing. The limitations here is there can only be one subscriber.
+   * O(1) publishing. This is just a convenient way to call a function with a
+   * trigger. This method should be used when performance is crucial. Otherwise
+   * use publish().
    */
   async publishFast(name: string, payload?: any): Promise<void> {
     const fn = this.fastEvents[name];
