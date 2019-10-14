@@ -1,0 +1,24 @@
+{
+  "name": "fast-observer",
+  "version": "1.0.0",
+  "description": "A simple zero-dependency O(1) and asynchronous event dispatcher.",
+  "main": "lib/observer.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*_test.ts"
+  },
+  "keywords": [
+    "observer",
+    "pubsub",
+    "event",
+    "dispatcher"
+  ],
+  "author": "Pete Saia",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.12",
+    "mocha": "^6.2.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}
