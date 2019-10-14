@@ -4,6 +4,7 @@
   "description": "A simple zero-dependency O(1) and asynchronous event dispatcher.",
   "main": "lib/observer.js",
   "scripts": {
+    "prepublish": "rm -rf lib/* && tsc",
     "test": "mocha -r ts-node/register src/**/*_test.ts"
   },
   "keywords": [

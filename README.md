@@ -28,7 +28,7 @@ import Observer from "fast-observer";
 
 const o = new Observer();
 
-// Define some O(N) subscriptions.
+// Define some O(N) subscriptions (nothing new here).
 o.subscribe("launch ship", launchTheShip);
 o.subscribe("launch ship", launchTheOtherShip);
 o.subscribe("launch ship", launchTheOtherShip);
