@@ -46,8 +46,8 @@ export default class Observer {
 
   /**
    * O(1) publishing. This is just a convenient way to call a function with a
-   * trigger. This method should be used when performance is crucial. Otherwise
-   * use publish().
+   * trigger. This method should be used when performance is crucial and you'd 
+   * like to stay within the observer pub/sub paradigm. Otherwise use publish().
    */
   async publishFast(name: string, payload?: any): Promise<void> {
     const fn = this.fastEvents[name];
