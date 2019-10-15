@@ -4,6 +4,7 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "lib",
+    "strict": true,
     "esModuleInterop": true
   },
   "exclude": ["node_modules", "lib", "src/*_test.ts"]
