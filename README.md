@@ -1,4 +1,4 @@
-# Fast Observer
+# Fast Observer [![Build Status](https://travis-ci.org/psaia/fast-observer.svg?branch=master)](https://travis-ci.org/psaia/fast-observer)
 
 **Does the world need another event dispatcher library?**
 
