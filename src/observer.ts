@@ -46,7 +46,7 @@ export default class Observer {
 
   /**
    * O(1) publishing. This is just a convenient way to call a function with a
-   * trigger. This method should be used when performance is crucial and you'd 
+   * trigger. This method should be used when performance is crucial and you'd
    * like to stay within the observer pub/sub paradigm. Otherwise use publish().
    */
   async publishFast(name: string, payload?: any): Promise<void> {
@@ -56,7 +56,7 @@ export default class Observer {
       const result = fn(payload);
 
       if (result && result["then"]) {
-        await fn(payload);
+        await Promise.race([result]);
       } else {
         fn(payload);
       }
